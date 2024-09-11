@@ -5,5 +5,5 @@ body["print"] = function() {
 }
 
 body["type"] = function(value) {
-    return typeof value;
+    return Array.isArray(value) ? "list" : typeof value;
 }

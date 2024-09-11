@@ -1,0 +1,7 @@
+(define is-one (item)
+    (equ item 1)
+    )
+
+(print 
+    (list-every (list 1 1 1 1 1) is-one)
+    )
