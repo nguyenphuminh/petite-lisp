@@ -75,9 +75,9 @@ false
 You can define a function with this format:
 ```lisp
 (define func-name (arg1 arg2 arg3)
-    (expression1)
-    (expression2)
-    (expression3)
+    expression1
+    expression2
+    expression3
     )
 ```
 With the last expression being the returned value. Note that only expressions are allowed in the function body, you can not define a function inside a function (for now, I might add closures in the future).
@@ -85,6 +85,31 @@ With the last expression being the returned value. Note that only expressions ar
 ### Immutability
 
 Variables do not exist in Petite Lisp, and functions can not be redefined. This helps achieve immutability which makes your code less unexpected and more comfortable to work with in a concurrent or parallel fashion.
+
+### Control flow
+
+You can do conditional branching by using the `if` expression:
+
+```lisp
+(if condition
+    expression_if_true
+    expression_if_false
+    )
+```
+
+For example, here we are comparing if two variables are equal:
+```lisp
+(define is-equal (var1 var2)
+    (if (equ var1 var2)
+        (print "These variables are equal")
+        (print "These variables are not equal")
+        )
+    )
+; 
+(is-equal 1 2)
+```
+
+There is no loop statements in Petite Lisp, you can create loops through recursions and built-in iterative functions.
 
 ### Concurrency
 
