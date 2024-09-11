@@ -1,0 +1,31 @@
+{
+  "name": "petite-lisp",
+  "version": "0.1.0",
+  "description": "A simple and opinionated Lisp dialect",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc & pkg plisp.js --target node18 -o plisp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nguyenphuminh/petite-lisp.git"
+  },
+  "keywords": [
+    "lisp",
+    "compiler",
+    "transpiler",
+    "js",
+    "petite-lisp"
+  ],
+  "author": "nguyenphuminh",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/nguyenphuminh/petite-lisp/issues"
+  },
+  "homepage": "https://github.com/nguyenphuminh/petite-lisp#readme",
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "pkg": "^5.8.1",
+    "typescript": "^5.6.2"
+  }
+}
