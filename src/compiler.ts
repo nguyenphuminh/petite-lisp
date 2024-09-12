@@ -1,6 +1,6 @@
 import definition from "./precompiles/definition";
 
-export const IDEN_CHARACTERS = "0123456789abcdefghijklmnopqrstuvwxyz-.";
+export const IDEN_CHARACTERS = "0123456789abcdefghijklmnopqrstuvwxyz-._";
 export const NUMERALS = "0123456789";
 
 export interface Token {
