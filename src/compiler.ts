@@ -359,7 +359,7 @@ export class Compiler {
                                 expressions: []
                             };
                         }
-                        // If not, the identifier is just a function argument
+                        // If not, the identifier is just a function argument or a function body
                         else {
                             const body: Body = { type: "value", dataType: defined[token.value] ? "function" : token.type, name: token.value };
                             const parent = bodies[pointer];
@@ -367,6 +367,25 @@ export class Compiler {
                             // If parent is "if", it shall have only 3 expressions
                             if (parent.type === "if" && parent.expressions?.length === 3) {
                                 throw new Error(`Compile time error: "if" shall only have 3 arguments at line ${token.line}.`);
+                            }
+
+                            // If identifier is a function arg, check if arg is defined
+                            if (!defined[token.value]) {
+                                let argDefined = false;
+
+                                for (let count = pointer; count >= 0; count--) {
+                                    const parent = bodies[count];
+                                    const args = parent.args as string[];
+
+                                    if (parent.type === "define" && args.includes(token.value)) {
+                                        argDefined = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!argDefined) {
+                                    throw new Error(`Compile time error: ${token.value} is undefined at line ${token.line}.`);
+                                }
                             }
 
                             parent.expressions?.push(body);
