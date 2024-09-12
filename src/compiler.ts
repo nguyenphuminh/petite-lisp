@@ -437,7 +437,7 @@ export class Compiler {
         }
 
         if (body.type === "logic") {
-            const expressions = body.expressions as any;
+            const expressions = (body.expressions as any).map((exp: any) => this.getCodeFromBody(exp));
 
             const operator: Record<string, string> = {
                 "and": "&&",

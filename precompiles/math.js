@@ -139,6 +139,15 @@ body["bit-urs"] = function() {
     return nums.reduce((a, b) => a >>> b);
 }
 
+body["not"] = function(item) {
+    // Only allow booleans
+    if (typeof item !== "boolean") {
+        throw new Error(`Runtime error: "not" only supports booleans.`);
+    }
+
+    return !item;
+}
+
 body["equ"] = function() {
     const items = [...arguments];
 

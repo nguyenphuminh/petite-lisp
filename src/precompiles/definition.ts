@@ -12,6 +12,7 @@ export default {
     "bit-ls": true,
     "bit-rs": true,
     "bit-urs": true,
+    "not": true,
     "equ": true,
     "neq": true,
     "gtr": true,
