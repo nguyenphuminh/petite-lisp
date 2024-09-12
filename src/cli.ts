@@ -45,17 +45,21 @@ export class CLI {
             }
         }
 
-        const tokens = compiler.tokenize(fs.readFileSync(options.input).toString());
-        const ast = compiler.parse(tokens);
-        const code = compiler.transpile(
-            ast,
-            fs.readFileSync(`${this.dir}/precompiles/math.js`).toString()   +
-            fs.readFileSync(`${this.dir}/precompiles/list.js`).toString()   +
-            fs.readFileSync(`${this.dir}/precompiles/string.js`).toString() +
-            fs.readFileSync(`${this.dir}/precompiles/record.js`).toString() +
-            fs.readFileSync(`${this.dir}/precompiles/utils.js`).toString() 
-        );
+        try {
+            const tokens = compiler.tokenize(fs.readFileSync(options.input).toString());
+            const ast = compiler.parse(tokens);
+            const code = compiler.transpile(
+                ast,
+                fs.readFileSync(`${this.dir}/precompiles/math.js`).toString()   +
+                fs.readFileSync(`${this.dir}/precompiles/list.js`).toString()   +
+                fs.readFileSync(`${this.dir}/precompiles/string.js`).toString() +
+                fs.readFileSync(`${this.dir}/precompiles/record.js`).toString() +
+                fs.readFileSync(`${this.dir}/precompiles/utils.js`).toString() 
+            );
 
-        fs.writeFileSync(options.output, code);
+            fs.writeFileSync(options.output, code);
+        } catch (e) {
+            console.log(e);
+        } 
     }
 }

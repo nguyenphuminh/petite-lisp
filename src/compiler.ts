@@ -18,10 +18,6 @@ export interface Body {
     dataType?: "string" | "number" | "identifier" | "function" | "boolean";
 }
 
-export interface ParseInfo {
-    isExpression: boolean;
-}
-
 export type AST = Body[];
 
 export class Compiler {
@@ -186,7 +182,10 @@ export class Compiler {
     parse(tokens: Token[], alreadyDefined: Record<string, boolean> = definition): AST {
         const ast: AST = [];
         
+        // Used to check which function is defined
         let defined: Record<string, boolean> = { ...alreadyDefined };
+        // Used to get the legal number of arguments for a function
+        let argCounts: Record<string, number> = {};
         let bodies: Body[] = [];
         let pointer = 0;
 
@@ -241,6 +240,18 @@ export class Compiler {
                         // If parent is "if", it shall have only 3 expressions
                         if (parent.type === "if" && parent.expressions?.length === 3) {
                             throw new Error(`Compile time error: "if" shall only have 3 arguments at line ${token.line}.`);
+                        }
+
+                        // If self is a function call, the exp amount shall be equal to function's arg amount
+                        let realCount = argCounts[self.name || ""];
+                        let selfCount = self.expressions?.length
+
+                        if (
+                            self.type === "call" &&
+                            typeof realCount !== "undefined" &&
+                            realCount !== selfCount
+                        ) {
+                            throw new Error(`Compile time error: Only had ${selfCount} arguments, expected ${realCount} at line ${token.line}.`);
                         }
 
                         parent.expressions?.push(self);
@@ -300,6 +311,8 @@ export class Compiler {
                                 args,
                                 expressions: []
                             };
+
+                            argCounts[name] = argCount;
 
                             count += 3 + argCount;
                         } else {
