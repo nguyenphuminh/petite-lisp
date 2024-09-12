@@ -11,7 +11,7 @@ body["str-get"] = function(str, index) {
         throw new Error(`Runtime error: "str-get" only supports strings.`);
     }
 
-    if (!str[index]) {
+    if (typeof str[index] === "undefined") {
         throw new Error(`Runtime error: "str-get": String index out of range.`);
     }
     
@@ -50,7 +50,7 @@ body["str-starts-with"] = function(str, child, pos) {
     }
 
     // If there is pos, it must be a number
-    if (pos && typeof pos !== "number") {
+    if (typeof pos !== "undefined" && typeof pos !== "number") {
         throw new Error(`Runtime error: "str-starts-with": pos must be a number.`);
     }
 
@@ -64,7 +64,7 @@ body["str-ends-with"] = function(str, child, pos) {
     }
 
     // If there is pos, it must be a number
-    if (pos && typeof pos !== "number") {
+    if (typeof pos !== "undefined" && typeof pos !== "number") {
         throw new Error(`Runtime error: "str-ends-with": pos must be a number.`);
     }
 
@@ -78,7 +78,7 @@ body["str-has"] = function(str, child, pos) {
     }
 
     // If there is pos, it must be a number
-    if (pos && typeof pos !== "number") {
+    if (typeof pos !== "undefined" && typeof pos !== "number") {
         throw new Error(`Runtime error: "str-has": pos must be a number.`);
     }
 
@@ -92,7 +92,7 @@ body["str-index-of"] = function(str, child, pos) {
     }
 
     // If there is pos, it must be a number
-    if (pos && typeof pos !== "number") {
+    if (typeof pos !== "undefined" && typeof pos !== "number") {
         throw new Error(`Runtime error: "str-index-of": pos must be a number.`);
     }
 
@@ -115,7 +115,7 @@ body["str-last-index-of"] = function(str, child, pos) {
     }
 
     // If there is pos, it must be a number
-    if (pos && typeof pos !== "number") {
+    if (typeof pos !== "undefined" && typeof pos !== "number") {
         throw new Error(`Runtime error: "str-last-index-of": pos must be a number.`);
     }
 
@@ -156,12 +156,12 @@ body["str-pad-start"] = function(str, len, child) {
     }
 
     // If there is len, it must be a number
-    if (len && typeof len !== "number") {
+    if (typeof len !== "undefined" && typeof len !== "number") {
         throw new Error(`Runtime error: "str-pad-start": len must be a number.`);
     }
 
     // If there is child, it must be a string
-    if (child && typeof child !== "string") {
+    if (typeof child !== "undefined" && typeof child !== "string") {
         throw new Error(`Runtime error: "str-pad-start": child must be a string.`);
     }
 
@@ -175,12 +175,12 @@ body["str-pad-end"] = function(str, len, child) {
     }
 
     // If there is len, it must be a number
-    if (len && typeof len !== "number") {
+    if (typeof len !== "undefined" && typeof len !== "number") {
         throw new Error(`Runtime error: "str-pad-end": len must be a number.`);
     }
 
     // If there is child, it must be a string
-    if (child && typeof child !== "string") {
+    if (typeof child !== "undefined" && typeof child !== "string") {
         throw new Error(`Runtime error: "str-pad-end": child must be a string.`);
     }
 
@@ -226,12 +226,12 @@ body["str-slice"] = function(str, start, end) {
     }
 
     // Start, if exists, must be a number
-    if (start && typeof start !== "number") {
+    if (typeof start !== "undefined" && typeof start !== "number") {
         throw new Error(`Runtime error: "str-slice": Start must be a number.`);
     }
 
     // End, if exists, must be a number
-    if (end && typeof end !== "number") {
+    if (typeof end !== "undefined" && typeof end !== "number") {
         throw new Error(`Runtime error: "str-slice": End must be a number.`);
     }
 
@@ -250,7 +250,7 @@ body["str-substring"] = function(str, start, end) {
     }
 
     // End, if exists, must be a number
-    if (end && typeof end !== "number") {
+    if (typeof end !== "undefined" && typeof end !== "number") {
         throw new Error(`Runtime error: "str-substring": End must be a number.`);
     }
 
@@ -264,7 +264,7 @@ body["str-split"] = function(str, delim, limit) {
     }
 
     // If limit exists, it must be a number
-    if (limit && typeof limit !== "number") {
+    if (typeof limit !== "undefined" && typeof limit !== "number") {
         throw new Error(`Runtime error: "str-split": Limit must be a number.`);
     }
 

@@ -11,15 +11,15 @@ body["list-len"] = function(list) {
 body["list-get"] = function(list, index) {
     if (!Array.isArray(list)) throw new Error(`Runtime error: "list-get": Argument is not a list.`);
     if (typeof index !== "number") throw new Error(`Runtime error: "list-get": Index must be a number.`);
-    if (!list[index]) throw new Error(`Runtime error: "list-get": Can not find item in list.`);
+    if (typeof list[index] === "undefined") throw new Error(`Runtime error: "list-get": Can not find item in list.`);
     
     return list[index];
 }
 
 body["list-slice"] = function(list, start, end) {
     if (!Array.isArray(list)) throw new Error(`Runtime error: "list-slice": Argument is not a list.`);
-    if (start && typeof start !== "number") throw new Error(`Runtime error: "list-slice": Start must be a number.`);
-    if (end && typeof end !== "number") throw new Error(`Runtime error: "list-slice": End must be a number.`);
+    if (typeof start !== "undefined" && typeof start !== "number") throw new Error(`Runtime error: "list-slice": Start must be a number.`);
+    if (typeof end !== "undefined" && typeof end !== "number") throw new Error(`Runtime error: "list-slice": End must be a number.`);
 
     return list.slice(start, end);
 }
@@ -72,7 +72,7 @@ body["list-has"] = function(list, item, start) {
     if (!Array.isArray(list)) throw new Error(`Runtime error: "list-has": Argument is not a list.`);
 
     // If start exists, it must be a number
-    if (start && typeof start !== "number") {
+    if (typeof start !== "undefined" && typeof start !== "number") {
         throw new Error(`Runtime error: "list-has": Start must be a number.`);
     }
 
@@ -83,7 +83,7 @@ body["list-index-of"] = function(list, item, start) {
     if (!Array.isArray(list)) throw new Error(`Runtime error: "list-index-of": Argument is not a list.`);
 
     // If start exists, it must be a number
-    if (start && typeof start !== "number") {
+    if (typeof start !== "undefined" && typeof start !== "number") {
         throw new Error(`Runtime error: "list-index-of": Start must be a number.`);
     }
 
@@ -94,7 +94,7 @@ body["list-last-index-of"] = function(list, item, start) {
     if (!Array.isArray(list)) throw new Error(`Runtime error: "list-last-index-of": Argument is not a list.`);
 
     // If start exists, it must be a number
-    if (start && typeof start !== "number") {
+    if (typeof start !== "undefined" && typeof start !== "number") {
         throw new Error(`Runtime error: "list-last-index-of": Start must be a number.`);
     }
 
@@ -105,7 +105,7 @@ body["list-join"] = function(list, delim) {
     if (!Array.isArray(list)) throw new Error(`Runtime error: "list-join": Argument is not a list.`);
 
     // If delim exists, it must be a string
-    if (delim && typeof delim !== "string") {
+    if (typeof delim !== "undefined" && typeof delim !== "string") {
         throw new Error(`Runtime error: "list-join": Delim must be a string.`);
     }
 
@@ -126,7 +126,7 @@ body["list-copy-within"] = function(list, index, start, end) {
     }
 
     // If end exists, it must be a number
-    if (end && typeof end !== "number") {
+    if (typeof end !== "undefined" && typeof end !== "number") {
         throw new Error(`Runtime error: "list-copy-within": End must be a number.`);
     }
 
@@ -137,7 +137,7 @@ body["list-flat"] = function(list, depth) {
     if (!Array.isArray(list)) throw new Error(`Runtime error: "list-flat": Argument is not a list.`);
 
     // If depth exists, it must be a number
-    if (depth && typeof depth !== "number") {
+    if (typeof depth !== "undefined" && typeof depth !== "number") {
         throw new Error(`Runtime error: "list-flat": Depth must be a number.`);
     }
 

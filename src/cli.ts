@@ -49,9 +49,10 @@ export class CLI {
         const ast = compiler.parse(tokens);
         const code = compiler.transpile(
             ast,
-            fs.readFileSync(`${this.dir}/precompiles/list.js`).toString()   +
             fs.readFileSync(`${this.dir}/precompiles/math.js`).toString()   +
+            fs.readFileSync(`${this.dir}/precompiles/list.js`).toString()   +
             fs.readFileSync(`${this.dir}/precompiles/string.js`).toString() +
+            fs.readFileSync(`${this.dir}/precompiles/record.js`).toString() +
             fs.readFileSync(`${this.dir}/precompiles/utils.js`).toString() 
         );
 

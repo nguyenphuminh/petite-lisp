@@ -88,6 +88,16 @@ export default {
     "list-reduce": true,
     "list-reduce-right": true,
     "list-sort": true,
+    "field": true,
+    "record": true,
+    "record-get": true,
+    "record-del": true,
+    "record-has": true,
+    "record-keys": true,
+    "record-values": true,
+    "record-fields": true,
+    "record-to-json": true,
+    "record-from-json": true,
     "print": true,
     "type": true 
 }
