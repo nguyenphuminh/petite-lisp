@@ -40,6 +40,8 @@ To learn how to write Petite Lisp, check out [this tutorial](./tutorial.md).
 - Custom bindings.
 - Improve concurrency.
 - Improve the CLI.
+- Ensure no undefined is possible:
+    - Currently arguments of callbacks can still be undefined if the user allows define more args than what the caller from the stdlib would pass values to.
 - Finish the docs.
 - Better compiler errors.
 

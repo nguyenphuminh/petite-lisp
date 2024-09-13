@@ -130,7 +130,7 @@ body["list-copy-within"] = function(list, index, start, end) {
         throw new Error(`Runtime error: "list-copy-within": End must be a number.`);
     }
 
-    return list.copyWithin(start, end);
+    return list.copyWithin(index, start, end);
 }
 
 body["list-flat"] = function(list, depth) {

@@ -326,6 +326,16 @@ These are functions for specific mathematical problems:
 * `(list-index-of list any number?) -> number`: Returns the first found position of an item. The third argument is an optional starting position of the list.
 * `(list-last-index-of list any number?) -> number`: Returns the last found position of an item. The third argument is an optional starting position of the list.
 * `(list-join list string) -> string`: Returns the list with all items joined into a string, separated by an optional delimiter.
+* `(list-copy-within list number number number) -> list`: Returns the list with items from start to end copied to index.
+* `(list-flat list number) -> list`: Returns the list, flatten with a specified depth.
+* `(list-every list callback) -> boolean`: Returns true if all items make the callback return true.
+* `(list-filter list callback) -> list`: Returns the list with items that makes the callback return true.
+* `(list-some list callback) -> boolean`: Returns true if there is an item that makes the callback return true.
+* `(list-map list callback) -> list`: Returns a new list with all values switched to `callback(value)`.
+* `(list-reduce list callback) -> any`: The callback will be provided two arguments - the first one being what would be returned, the second one being the current item of the current iteration. The first arg will be changed to the returned value of the callback after each iteration.
+* `(list-reduce-right list callback) -> any`: Same thing as reduce but loops from right to left.
+* `(list-sort list callback) -> list`: Sort the list, decide to sort two items if callback returns true.
+
 
 ### String
 
