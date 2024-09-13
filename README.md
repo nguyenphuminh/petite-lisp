@@ -30,6 +30,20 @@ node output
 To learn how to write Petite Lisp, check out [this tutorial](./tutorial.md).
 
 
+## Todos
+
+(Not in order)
+
+- Closures and scope.
+- Error handling.
+- Modules.
+- Custom bindings.
+- Improve concurrency.
+- Improve the CLI.
+- Finish the docs.
+- Better compiler errors.
+
+
 ## Copyrights
 
 Copyrights © 2024 Nguyen Phu Minh.
