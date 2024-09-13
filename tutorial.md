@@ -315,8 +315,25 @@ These are functions for specific mathematical problems:
 
 ### List
 
+* `(list ...any) -> list`: Returns a list with the specified items passed as arguments.
+* `(list-get list number) -> any`: Returns an item from the list with the specified list and index.
+* `(list-slice list number? number?) -> list`: Returns a new list, sliced from the specified list, from start to end. Start defaults to 0, end defaults to the end of the list.
+* `(list-merge ...list) -> list`: Returns a list merged from specified lists.
+* `(list-with list number any) -> list`: Returns a new list from the specified list with the item at index set to the new value.
+* `(list-reverse list) -> list`: Returns a reversed list.
+* `(list-splice list number number?) -> list`: Returns a new list with "n" items removed from start. "n" defaults to 1.
+* `(list-has list any number?) -> boolean`: Check if list has a value or not. The third argument is an optional starting position of the list.
+* `(list-index-of list any number?) -> number`: Returns the first found position of an item. The third argument is an optional starting position of the list.
+* `(list-last-index-of list any number?) -> number`: Returns the last found position of an item. The third argument is an optional starting position of the list.
+* `(list-join list string) -> string`: Returns the list with all items joined into a string, separated by an optional delimiter.
+
 ### String
 
 ### Record
 
+### Concurrency
+
 ### Utils
+
+* `(print ...any) -> 0`: Prints the items specified to the console.
+* `(type any) -> string`: Returns the type of a value.

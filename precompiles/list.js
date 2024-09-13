@@ -61,7 +61,7 @@ body["list-splice"] = function(list) {
     }
 
     // If count exists, it must be a number
-    if (count && typeof count !== "number") {
+    if (typeof count !== "undefined" && typeof count !== "number") {
         throw new Error(`Runtime error: "list-splice": Count must be a number.`);
     }
 
@@ -98,7 +98,7 @@ body["list-last-index-of"] = function(list, item, start) {
         throw new Error(`Runtime error: "list-last-index-of": Start must be a number.`);
     }
 
-    return list.indexOf(item, start);
+    return list.lastIndexOf(item, start);
 }
 
 body["list-join"] = function(list, delim) {
