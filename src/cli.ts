@@ -54,6 +54,7 @@ export class CLI {
                 fs.readFileSync(`${this.dir}/precompiles/list.js`).toString()   +
                 fs.readFileSync(`${this.dir}/precompiles/string.js`).toString() +
                 fs.readFileSync(`${this.dir}/precompiles/record.js`).toString() +
+                fs.readFileSync(`${this.dir}/precompiles/concurrency.js`).toString() +
                 fs.readFileSync(`${this.dir}/precompiles/utils.js`).toString() 
             );
 

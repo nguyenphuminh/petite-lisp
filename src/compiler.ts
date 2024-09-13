@@ -16,6 +16,7 @@ export interface Body {
     args?: string[];
     expressions?: Body[];
     dataType?: "string" | "number" | "identifier" | "function" | "boolean";
+    direct?: boolean;
 }
 
 export type AST = Body[];
@@ -338,6 +339,25 @@ export class Compiler {
                     }
                     // No specific name specified
                     else {
+                        // Check if identifier is defined as an arg
+                        let argDefined = false;
+
+                        if (!defined[token.value]) {
+                            for (let count = pointer; count >= 0; count--) {
+                                const parent = bodies[count];
+                                const args = parent.args as string[];
+
+                                if (parent.type === "define" && args.includes(token.value)) {
+                                    argDefined = true;
+                                    break;
+                                }
+                            }
+
+                            if (!argDefined) {
+                                throw new Error(`Compile time error: ${token.value} is undefined at line ${token.line}.`);
+                            }
+                        }
+
                         // If the current slot is of type empty, it is a function call waiting for a body
                         if (bodies[pointer].type === "empty") {
                             // Get function name
@@ -348,15 +368,16 @@ export class Compiler {
                                 throw new Error(`Compile time error: Invalid funtion name at line ${token.line}.`);
                             }
 
-                            // Can only call function if it is already defined
-                            if (!defined[name]) {
+                            // Can only call a function if it is already defined or it is an identifier which might return a function as value
+                            if (!defined[name] && !argDefined) {
                                 throw new Error(`Compile time error: Function ${name} is not defined at line ${token.line}.`);
                             }
 
                             bodies[pointer] = {
                                 type: "call",
                                 name,
-                                expressions: []
+                                expressions: [],
+                                direct: defined[name]
                             };
                         }
                         // If not, the identifier is just a function argument or a function body
@@ -367,25 +388,6 @@ export class Compiler {
                             // If parent is "if", it shall have only 3 expressions
                             if (parent.type === "if" && parent.expressions?.length === 3) {
                                 throw new Error(`Compile time error: "if" shall only have 3 arguments at line ${token.line}.`);
-                            }
-
-                            // If identifier is a function arg, check if arg is defined
-                            if (!defined[token.value]) {
-                                let argDefined = false;
-
-                                for (let count = pointer; count >= 0; count--) {
-                                    const parent = bodies[count];
-                                    const args = parent.args as string[];
-
-                                    if (parent.type === "define" && args.includes(token.value)) {
-                                        argDefined = true;
-                                        break;
-                                    }
-                                }
-
-                                if (!argDefined) {
-                                    throw new Error(`Compile time error: ${token.value} is undefined at line ${token.line}.`);
-                                }
                             }
 
                             parent.expressions?.push(body);
@@ -442,7 +444,10 @@ export class Compiler {
         if (body.type === "call") {
             const expressions = body.expressions?.map(expression => this.getCodeFromBody(expression)).join(", ");
 
-            return `body["${body.name}"](${expressions})`;
+            // Check if we are directly calling a function or an argument containing the function
+            const toCall = body.direct ? `body["${body.name}"]` : body.name;
+
+            return `${toCall}(${expressions})`;
         }
 
         if (body.type === "define") {

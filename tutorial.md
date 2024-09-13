@@ -207,6 +207,47 @@ More record-related functions can be found down below.
 
 ## Concurrency
 
+In real-world applications, there must be a way to write non-blocking code. For example, consider an http request:
+```clojure
+(fetch "https://google.com")
+```
+
+We need to wait for some time for the server to respond before other code can continue executing. This effectively freezes up the entire program. To prevent this, a concurrency system for non-blocking code is crucial.
+
+Petite Lisp inherits Javascript's concurrency system and its APIs behind the scene. Here are some built-in ways for you to handle concurrency in Petite Lisp:
+
+### Promises
+
+Promises in Petite Lisp are promises in Javascript, here is how you can create one:
+```clojure
+(promise callback
+    (then func-to-run-when-resolved-1)
+    (then func-to-run-when-resolved-2)
+    (then func-to-run-when-resolved-3)
+    (catch func-to-run-when-error)
+    ...
+    )
+```
+
+A callback must have a format like this:
+```clojure
+(define callback (resolve reject)
+    ; Call resolve to resolve the promise, giving the promise the value passed to resolve 
+    (resolve 123)
+    ; Call reject when there is an error
+    (reject "This function is faulty")
+    )
+    ; Both resolve and reject must have an argument btw
+```
+
+And you can also use `then` like this:
+```clojure
+(attach-then some-promise func-to-run-when-resolved)
+```
+
+
+## Error handling
+
 To do.
 
 

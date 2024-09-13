@@ -98,6 +98,10 @@ export default {
     "record-fields": true,
     "record-to-json": true,
     "record-from-json": true,
+    "promise": true,
+    "then": true,
+    "then-catch": true,
+    "attach-then": true,
     "print": true,
     "type": true 
 }
