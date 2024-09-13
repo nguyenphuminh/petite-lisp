@@ -222,8 +222,18 @@ export class Compiler {
             } else {
                 if (token.type === "punc" && token.value === "(") {
                     // Must have a body to increase the depth
-                    if (bodies[pointer].type === "empty" || bodies[pointer].type === "value") {
+                    if (bodies[pointer].type === "value") {
                         throw new Error(`Compile time error: An expression is empty at line ${token.line}.`);
+                    }
+
+                    // If body is empty, then this is a function call to get another function to call
+                    if (bodies[pointer].type === "empty") {
+                        bodies[pointer] = {
+                            type: "call",
+                            name: "",
+                            expressions: [],
+                            direct: false
+                        };
                     }
 
                     pointer++;
@@ -442,12 +452,19 @@ export class Compiler {
         }
 
         if (body.type === "call") {
-            const expressions = body.expressions?.map(expression => this.getCodeFromBody(expression)).join(", ");
+            if (body.name !== "") {
+                const expressions = body.expressions?.map(expression => this.getCodeFromBody(expression)).join(", ");
 
-            // Check if we are directly calling a function or an argument containing the function
-            const toCall = body.direct ? `body["${body.name}"]` : body.name;
+                // Check if we are directly calling a function or an argument containing the function
+                const toCall = body.direct ? `body["${body.name}"]` : body.name;
 
-            return `${toCall}(${expressions})`;
+                return `${toCall}(${expressions})`;
+            } else {
+                const toCall = this.getCodeFromBody((body.expressions as any)[0]);
+                const expressions = body.expressions?.slice(1).map(expression => this.getCodeFromBody(expression)).join(", ");
+
+                return `(${toCall})(${expressions})`;
+            }            
         }
 
         if (body.type === "define") {
@@ -457,7 +474,7 @@ export class Compiler {
                                     .join("\n    ");
             const lastExpression = "return " + this.getCodeFromBody((body.expressions as any)[(body.expressions as any).length-1] as any);
 
-            return `body["${body.name}"] = function(${body.args?.join(", ")}) {\n` +
+            return `body["${body.name}"] = (${body.args?.join(", ")}) => {\n` +
                    `    ${expressions}\n` +
                    `    ${lastExpression}\n` +
                    `}`
