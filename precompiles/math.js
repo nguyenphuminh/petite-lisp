@@ -228,6 +228,14 @@ body["ceil"] = function(num) {
     return Math.ceil(num);
 }
 
+body["trunc"] = function(num) {
+    if (typeof num !== "number") {
+        throw new Error(`Runtime error: "trunc" only supports numbers.`);
+    }
+
+    return Math.trunc(num);
+}
+
 body["abs"] = function(num) {
     if (typeof num !== "number") {
         throw new Error(`Runtime error: "abs" only supports numbers.`);
@@ -276,12 +284,12 @@ body["atan"] = function(num) {
     return Math.atan(num);
 }
 
-body["atan2"] = function(num) {
-    if (typeof num !== "number") {
+body["atan2"] = function(y, x) {
+    if (typeof y !== "number" || typeof x !== "number") {
         throw new Error(`Runtime error: "atan2" only supports numbers.`);
     }
 
-    return Math.atan2(num);
+    return Math.atan2(y, x);
 }
 
 body["atanh"] = function(num) {

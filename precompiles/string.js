@@ -297,3 +297,13 @@ body["str-wellform"] = function(str) {
 
     return str.toWellFormed();
 }
+
+
+body["str-to-num"] = function(str) {
+    // Only allow strings
+    if (typeof str !== "string") {
+        throw new Error(`Runtime error: "str-to-num" only supports strings.`);
+    }
+
+    return parseFloat(str);
+}

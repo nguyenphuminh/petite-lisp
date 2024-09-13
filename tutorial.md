@@ -258,9 +258,60 @@ To do.
 
 ## Built-in functions
 
-To do.
+The list down below will follow the format of `(function-name data-type-of-arg-1 data-type-of-arg-2 data-type-of-arg-3) -> data-type-of-result`. If a data type is written as `...data-type`, it means that you can insert infinitely many args with that data type into the function. If it is written as `data-type?`, it means that the argument is optional.
 
 ### Math
+
+These are functions for basic mathematical operations:
+
+* `(add ...number) -> number`: Add numbers together.
+* `(sub number ...number) -> number`: Subtract a number by the values provided after it.
+* `(mul ...number) -> number`: Multiply numbers together.
+* `(div number ...number) -> number`: Divide a number by the values provided after it.
+* `(mod number ...number) -> number`: Mod a number by the values provided after it.
+* `(pow number ...number) -> number`: Power of a number to the values provided after it.
+* `(bit-and ...number) -> number`: Bitwise AND numbers together.
+* `(bit-or ...number) -> number`: Bitwise OR numbers together.
+* `(bit-xor ...number) -> number`: Bitwise XOR numbers together.
+* `(bit-not number)`: Bitwise NOT a number.
+* `(bit-ls number ...number) -> number`: Bitwise left shift a numnber with the numbers provided after it.
+* `(bit-rs number ...number) -> number`: Bitwise right shift a numnber with the numbers provided after it.
+* `(bit-urs number ...number) -> number`: Bitwise unsigned right shift a numnber with the numbers provided after it.
+
+These are functions for logical conditions:
+
+* `(not boolean) -> boolean`: Returns true if argument is false.
+* `(equ ...any) -> boolean`: Returns true if all arguments are equal.
+* `(neq ...any) -> boolean`: Returns true if one pair of arguments is unequal.
+* `(gtr ...any) -> boolean`: Returns true if the preceding argument is greater than the following argument.
+* `(geq ...any) -> boolean`: Returns true if the preceding argument is greater than or equal to the following argument.
+* `(lss ...any) -> boolean`: Returns true if the preceding argument is less than the following argument.
+* `(leq ...any) -> boolean`: Returns true if the preceding argument is less than or equal to the following argument.
+
+These are functions for specific mathematical problems:
+
+* `(round number) -> number`: Rounds a floating point number into an integer.
+* `(floor number) -> number`: Rounds down and returns the largest integer less than or equal to a given number.
+* `(ceil number) -> number`: Rounds up and returns the smallest integer greater than or equal to a given number.
+* `(trunc number) -> number`: Returns the integer part of a number by removing any fractional digits.
+* `(abs number) -> number`: Returns the absolute value of a number.
+* `(asin number) -> number`: Arcsin.
+* `(asinh number) -> number`: Hyperbolic arcsin.
+* `(acos number) -> number`: Arccos.
+* `(acosh number) -> number`: Hyperbolic arccos.
+* `(atan number) -> number`: Arctan.
+* `(atan2 number number) -> number`: Returns the angle in the plane (in radians) between the positive x-axis and the ray from (0, 0) to the point (x, y). First arg is y, second arg is x.
+* `(atanh number) -> number`: Hyperbolic arctan.
+* `(sin number) -> number`: Sin.
+* `(sinh number) -> number`: Hyperbolic sin.
+* `(cos number) -> number`: Cos.
+* `(cosh number) -> number`: Hyperbolic cos.
+* `(tan number) -> number`: Tan.
+* `(tanh number) -> number`: Hyperbolic tan.
+* `(log number) -> number`: Natural log.
+* `(num-to-str number) -> string`: Converts a number to a string.
+* `(rand) -> number`: Returns a floating-point, pseudo-random number that's greater than or equal to 0 and less than 1.
+* `(exp number) -> number`: Returns e^x with x being the argument.
 
 ### List
 
